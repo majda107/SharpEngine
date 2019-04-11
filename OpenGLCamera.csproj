@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\Camera.cs" />
     <Compile Include="Render\ACamera.cs" />
+    <Compile Include="Solids\ASolid.cs" />
+    <Compile Include="Solids\BlockSolid.cs" />
+    <Compile Include="Solids\CubeSolid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
