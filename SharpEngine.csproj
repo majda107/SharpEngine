@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gamelib\AKeyProcessor.cs" />
     <Compile Include="Gamelib\Game.cs" />
     <Compile Include="Gamelib\AGameObject.cs" />
+    <Compile Include="Gamelib\KeyboardProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\Camera.cs" />

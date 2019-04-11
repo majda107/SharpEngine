@@ -1,0 +1,11 @@
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\bin\Debug\OpenGLCamera.exe.config
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\bin\Debug\OpenGLCamera.exe
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\bin\Debug\OpenGLCamera.pdb
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\bin\Debug\OpenTK.dll
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\bin\Debug\OpenTK.pdb
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\bin\Debug\OpenTK.xml
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\obj\Debug\SharpEngine.csprojAssemblyReference.cache
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\obj\Debug\SharpEngine.csproj.CoreCompileInputs.cache
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\obj\Debug\SharpEngine.csproj.CopyComplete
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\obj\Debug\OpenGLCamera.exe
+C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\OpenGLCamera\obj\Debug\OpenGLCamera.pdb
