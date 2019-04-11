@@ -7,7 +7,7 @@ using OpenTK;
 using OpenTK.Input;
 using OpenTK.Graphics.OpenGL;
 
-namespace OpenGLCamera.Render
+namespace SharpEngine.Render
 {
     class Camera : ACamera
     {
@@ -17,7 +17,6 @@ namespace OpenGLCamera.Render
             this.yaw = 0;
             this.pitch = 0;
             this.sensitivity = 1;
-            this.lastState = Mouse.GetState();
             Update();
         }
 
@@ -35,18 +34,13 @@ namespace OpenGLCamera.Render
             GL.LoadMatrix(ref lookAt);
         }
 
-        public void ProcessMouse()
+        public void ProcessMouse(Processors.AMouseProcessor mouseProcessor)
         {
-            var state = Mouse.GetState();
-            var xDev = state.X - lastState.X;
-            var yDev = state.Y - lastState.Y;
-            lastState = state;
-
-            this.yaw += (float)xDev / 400f * sensitivity;
-            this.pitch += (float)yDev / 400f * sensitivity;
+            this.yaw += (float)mouseProcessor.xDev / 400f * sensitivity;
+            this.pitch += (float)mouseProcessor.yDev / 400f * sensitivity;
         }
 
-        public void ProcessKeys(Gamelib.AKeyProcessor keyProcessor)
+        public void ProcessKeys(Processors.AKeyProcessor keyProcessor)
         {
             Vector3 toMove = new Vector3(0, 0, 0);
             foreach (Key key in keyProcessor.keysDown)

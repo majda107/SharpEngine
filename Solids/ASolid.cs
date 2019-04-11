@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenGLCamera.Solids
+namespace SharpEngine.Solids
 {
     abstract class ASolid : Gamelib.AGameObject
     {

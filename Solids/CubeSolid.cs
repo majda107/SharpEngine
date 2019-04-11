@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 
-namespace OpenGLCamera.Solids
+namespace SharpEngine.Solids
 {
     class CubeSolid : BlockSolid
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
-using OpenGLCamera.Gamelib;
+using SharpEngine.Gamelib;
 
-namespace OpenGLCamera
+namespace SharpEngine
 {
     class Program
     {

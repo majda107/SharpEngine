@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using OpenGLCamera.Render;
-using OpenGLCamera.Solids;
+using SharpEngine.Render;
+using SharpEngine.Solids;
+using SharpEngine.Processors;
 using OpenTK.Input;
 
-namespace OpenGLCamera.Gamelib
+namespace SharpEngine.Gamelib
 {
     class Game
     {
@@ -19,8 +20,9 @@ namespace OpenGLCamera.Gamelib
 
 
         public Camera camera { get; private set; }
-        public KeyboardProcessor keyboardProcessor { get; private set; }
 
+        public KeyboardProcessor keyboardProcessor { get; private set; }
+        public MouseProcessor mouseProcessor { get; private set; }
 
 
         public BlockSolid testSolid { get; private set; }
@@ -33,6 +35,7 @@ namespace OpenGLCamera.Gamelib
 
             this.camera = new Camera();
             this.keyboardProcessor = new KeyboardProcessor();
+            this.mouseProcessor = new MouseProcessor();
 
             this.testSolid = new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8);
             this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
@@ -71,7 +74,9 @@ namespace OpenGLCamera.Gamelib
 
             CreatePerspectiveProjection(45f);
 
-            this.camera.ProcessMouse();
+            this.mouseProcessor.Update(Mouse.GetState());
+
+            this.camera.ProcessMouse(this.mouseProcessor);
             this.camera.ProcessKeys(this.keyboardProcessor);
             this.camera.Update();
 

@@ -7,7 +7,7 @@ using OpenTK;
 using OpenTK.Input;
 using OpenTK.Graphics.OpenGL;
 
-namespace OpenGLCamera.Render
+namespace SharpEngine.Render
 {
     abstract class ACamera : Gamelib.AGameObject
     {
@@ -23,7 +23,6 @@ namespace OpenGLCamera.Render
         /// Pitch angle of the camera in space
         /// </summary>
         public float pitch;
-        public MouseState lastState;
 
         /// <summary>
         /// Mouse sensitivity
