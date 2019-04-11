@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 
-namespace OpenGLCamera.Gamelib
+namespace SharpEngine.Gamelib
 {
     abstract class AGameObject
     {
