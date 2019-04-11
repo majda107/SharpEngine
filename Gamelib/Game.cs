@@ -15,18 +15,24 @@ namespace OpenGLCamera.Gamelib
     {
         public GameWindow gw { get; private set; }
         public double frameRate { get; private set; }
+
+
+
         public Camera camera { get; private set; }
+        public KeyboardProcessor keyboardProcessor { get; private set; }
+
+
 
         public BlockSolid testSolid { get; private set; }
         public CubeSolid testCube { get; private set; }
 
-        public List<Key> keysDown { get; private set; }
         public Game(GameWindow gw, double frameRate)
         {
             this.gw = gw;
             this.frameRate = frameRate;
+
             this.camera = new Camera();
-            this.keysDown = new List<Key>();
+            this.keyboardProcessor = new KeyboardProcessor();
 
             this.testSolid = new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8);
             this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
@@ -41,20 +47,10 @@ namespace OpenGLCamera.Gamelib
             this.gw.UpdateFrame += UpdateF;
             this.gw.Resize += Resized;
 
-            this.gw.KeyDown += KeyDown;
-            this.gw.KeyUp += KeyUp;
+            this.gw.KeyDown += (o, e) => this.keyboardProcessor.AddKey(e.Key);
+            this.gw.KeyUp += (o, e) => this.keyboardProcessor.RemoveKey(e.Key);
 
             this.gw.Run(1 / this.frameRate);
-        }
-
-        private void KeyUp(object sender, OpenTK.Input.KeyboardKeyEventArgs e)
-        {
-            if (this.keysDown.Contains(e.Key)) this.keysDown.Remove(e.Key);
-        }
-
-        private void KeyDown(object sender, OpenTK.Input.KeyboardKeyEventArgs e)
-        {
-            if (!this.keysDown.Contains(e.Key)) this.keysDown.Add(e.Key);
         }
 
         private void Resized(object sender, EventArgs e)
@@ -76,7 +72,7 @@ namespace OpenGLCamera.Gamelib
             CreatePerspectiveProjection(45f);
 
             this.camera.ProcessMouse();
-            this.camera.ProcessKeys(this.keysDown);
+            this.camera.ProcessKeys(this.keyboardProcessor);
             this.camera.Update();
 
             this.testSolid.Render();
