@@ -18,17 +18,14 @@ namespace OpenGLCamera.Render
             this.pitch = 0;
             this.sensitivity = 1;
             this.lastState = Mouse.GetState();
-            Update(new List<Key>()); // generate lookAt matrix at 0 0 0
+            Update();
         }
 
         /// <summary>
         /// Camera update each frame
         /// </summary>
-        /// <param name="keysDown">List of keys being pushed down</param>
-        public override void Update(List<Key> keysDown)
+        public override void Update()
         {
-            Move(keysDown, yaw, pitch);
-
             this.lookAt = Matrix4.LookAt(pos, new Vector3(pos.X, pos.Y, pos.Z + 1), Vector3.UnitY);
 
             this.lookAt *= Matrix4.CreateRotationY(yaw);
@@ -49,12 +46,12 @@ namespace OpenGLCamera.Render
             this.pitch += (float)yDev / 400f * sensitivity;
         }
 
-        private void Move(List<Key> keysDown, float yaw, float pitch)
+        public void ProcessKeys(List<Key> keysDown)
         {
             Vector3 toMove = new Vector3(0, 0, 0);
-            foreach(Key key in keysDown)
+            foreach (Key key in keysDown)
             {
-                switch(key)
+                switch (key)
                 {
                     case Key.W:
                         toMove.Z += 1;
@@ -74,6 +71,19 @@ namespace OpenGLCamera.Render
                     case Key.ShiftLeft:
                         toMove.Y -= 1;
                         break;
+
+                    case Key.Left:
+                        this.yaw -= MathHelper.DegreesToRadians(1);
+                        break;
+                    case Key.Right:
+                        this.yaw += MathHelper.DegreesToRadians(1);
+                        break;
+                    case Key.Up:
+                        this.pitch -= MathHelper.DegreesToRadians(1);
+                        break;
+                    case Key.Down:
+                        this.pitch += MathHelper.DegreesToRadians(1);
+                        break;
                 }
             }
 
@@ -81,7 +91,7 @@ namespace OpenGLCamera.Render
 
             pos.X = pos.X + (float)(toMove.Z * Math.Cos(yaw + MathHelper.DegreesToRadians(90)));
             pos.Z = pos.Z + (float)(toMove.Z * Math.Sin(yaw + MathHelper.DegreesToRadians(90)));
-            
+
             pos.X = pos.X + (float)(toMove.X * Math.Cos(yaw));
             pos.Z = pos.Z + (float)(toMove.X * Math.Sin(yaw));
         }

@@ -30,6 +30,6 @@ namespace OpenGLCamera.Render
         /// </summary>
         public float sensitivity;
 
-        public abstract void Update(List<OpenTK.Input.Key> keysDown);
+        public abstract void Update();
     }
 }
