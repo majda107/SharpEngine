@@ -46,10 +46,10 @@ namespace OpenGLCamera.Render
             this.pitch += (float)yDev / 400f * sensitivity;
         }
 
-        public void ProcessKeys(List<Key> keysDown)
+        public void ProcessKeys(Gamelib.AKeyProcessor keyProcessor)
         {
             Vector3 toMove = new Vector3(0, 0, 0);
-            foreach (Key key in keysDown)
+            foreach (Key key in keyProcessor.keysDown)
             {
                 switch (key)
                 {
