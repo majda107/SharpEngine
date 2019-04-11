@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenGLCamera.Render;
+using OpenGLCamera.Solids;
 using OpenTK.Input;
 
 namespace OpenGLCamera.Gamelib
@@ -16,14 +17,20 @@ namespace OpenGLCamera.Gamelib
         public double frameRate { get; private set; }
         public Camera camera { get; private set; }
 
+        public BlockSolid testSolid { get; private set; }
+        public CubeSolid testCube { get; private set; }
+
         public List<Key> keysDown { get; private set; }
         public Game(GameWindow gw, double frameRate)
         {
             this.gw = gw;
             this.frameRate = frameRate;
             this.camera = new Camera();
-
             this.keysDown = new List<Key>();
+
+            this.testSolid = new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8);
+            this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
+            this.testCube.color = new float[]{ 1.0f, 0.2f, 0.2f};
         }
 
         public void Start()
@@ -69,21 +76,27 @@ namespace OpenGLCamera.Gamelib
             CreatePerspectiveProjection(45f);
 
             this.camera.ProcessMouse();
-            this.camera.Update(this.keysDown);
+            this.camera.ProcessKeys(this.keysDown);
+            this.camera.Update();
 
-            GL.Begin(PrimitiveType.Triangles);
-            GL.Vertex3(0, 0, 30);
-            GL.Vertex3(10, 0, 30);
-            GL.Vertex3(10, 10, 30);
-            GL.End();
+            this.testSolid.Render();
+            this.testCube.Render();
 
             gw.SwapBuffers();
         }
 
         private void Loaded(object sender, EventArgs e)
         {
-            GL.Enable(EnableCap.DepthTest);
             GL.ClearColor(0.8f, 0.0f, 0.0f, 0.0f);
+
+            GL.Enable(EnableCap.DepthTest);
+            GL.Enable(EnableCap.Lighting);
+
+            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 10.0f, 10.0f, -10.0f });
+            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 1.0f, 1.0f, 1.0f });
+            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 1.0f, 1.0f, 1.0f });
+
+            GL.Enable(EnableCap.Light0);
         }
     }
 }
