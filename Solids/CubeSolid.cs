@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenTK;
+
+namespace OpenGLCamera.Solids
+{
+    class CubeSolid : BlockSolid
+    {
+        public CubeSolid(Vector3 pos, int size) : base(pos, size, size, size)
+        {
+
+        }
+    }
+}
