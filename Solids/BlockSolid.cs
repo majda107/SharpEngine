@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpEngine.Gamelib;
 using OpenTK.Graphics.OpenGL;
 using OpenTK;
 
@@ -20,6 +21,8 @@ namespace SharpEngine.Solids
             this.height = height;
             this.depth = depth;
             this.color = new float[4] { 1.0f, 1.0f, 1.0f, 1.0f };
+
+            this.hitbox = new Hitbox(new Vector3(pos.X + width / 2, pos.Y - height/2, pos.Z - depth / 2), new Vector3(pos.X - width / 2, pos.Y + height / 2, pos.Z + depth / 2));
         }
 
         protected override void RenderBody()

@@ -26,14 +26,15 @@ namespace SharpEngine.Gamelib
 
         public void Render()
         {
-            GL.Color4(0.1, 0.8, 0.16, 0.4);
+            GL.Color4(0.3, 0.3, 0.7, 0.4);
 
             GL.Begin(PrimitiveType.Quads);
 
-            GL.Vertex3(first.X, second.Y, first.Z);
-            GL.Vertex3(first.X, first.X, first.Z);
-            GL.Vertex3(second.X, first.Y, first.Z);
-            GL.Vertex3(second.X, second.Y, first.Z);
+            // front
+            GL.Vertex3(first.X, second.Y, first.Z - 0.5);
+            GL.Vertex3(first.X, first.Y, first.Z - 0.5);
+            GL.Vertex3(second.X, first.Y, first.Z - 0.5);
+            GL.Vertex3(second.X, second.Y, first.Z - 0.5);
 
             GL.End();
         }

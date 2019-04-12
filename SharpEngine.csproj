@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gamelib\AHitbox.cs" />
+    <Compile Include="Gamelib\Hitbox.cs" />
     <Compile Include="Processors\AKeyProcessor.cs" />
     <Compile Include="Processors\AMouseProcessor.cs" />
     <Compile Include="Gamelib\Game.cs" />
