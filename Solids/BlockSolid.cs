@@ -13,20 +13,18 @@ namespace SharpEngine.Solids
         public int width { get; private set; }
         public int height { get; private set; }
         public int depth { get; private set; }
-
-        public float[] color { get; set; }
         public BlockSolid(Vector3 pos, int width, int height, int depth)
         {
             this.pos = pos;
             this.width = width;
             this.height = height;
             this.depth = depth;
-            this.color = new float[3] { 1.0f, 1.0f, 1.0f };
+            this.color = new float[4] { 1.0f, 1.0f, 1.0f, 0.0f };
         }
 
         protected override void RenderBody()
         {
-            GL.Color3(color) ;
+            GL.Color4(color) ;
 
             GL.Begin(PrimitiveType.Quads);
 

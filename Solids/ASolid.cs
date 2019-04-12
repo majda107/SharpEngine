@@ -11,6 +11,7 @@ namespace SharpEngine.Solids
         protected int textureID;
         protected double scale;
         public bool visible { get; set; }
+        public float[] color { get; set; }
         public ASolid()
         {
             this.scale = 1.0;
