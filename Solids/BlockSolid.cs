@@ -27,6 +27,14 @@ namespace SharpEngine.Solids
 
         protected override void RenderBody()
         {
+            GL.PushMatrix();
+
+            GL.Scale(this.scale);
+
+            GL.Rotate(this.angles.X, Vector3.UnitY);
+            GL.Rotate(this.angles.Y, Vector3.UnitX);
+            GL.Rotate(this.angles.Z, Vector3.UnitZ);
+
             GL.Color4(color) ;
 
             GL.Begin(PrimitiveType.Quads);
@@ -68,6 +76,8 @@ namespace SharpEngine.Solids
             GL.Vertex3(pos.X + -width / 2, pos.Y + height / 2, pos.Z + depth / 2);
 
             GL.End();
+
+            GL.PopMatrix();
         }
     }
 }

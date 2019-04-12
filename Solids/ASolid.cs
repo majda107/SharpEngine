@@ -4,21 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpEngine.Gamelib;
+using OpenTK;
 
 namespace SharpEngine.Solids
 {
     abstract class ASolid : AGameObject
     {
-        protected int textureID;
-        protected double scale;
+        public Vector3 scale { get; set; }
         public bool visible { get; set; }
         public float[] color { get; set; }
+        /// <summary>
+        /// Yaw, Pitch, Roll (in degrees)
+        /// </summary>
+        public Vector3 angles { get; set; } 
+
 
         public AHitbox hitbox { get; set; }
         public ASolid()
         {
             this.hitbox = null;
-            this.scale = 1.0;
+
+            this.scale = new Vector3(1.0f, 1.0f, 1.0f);
+            this.angles = new Vector3(0.0f, 0.0f, 0.0f);
             this.visible = true;
         }
         public void Render()

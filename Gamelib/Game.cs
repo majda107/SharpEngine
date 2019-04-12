@@ -80,7 +80,6 @@ namespace SharpEngine.Gamelib
             this.camera.ProcessKeys(this.keyboardProcessor);
             this.camera.Update();
 
-            this.testSolid.visible = true;
             this.testSolid.hitbox.visible = true;
             this.testSolid.Render();   
 
