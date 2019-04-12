@@ -24,7 +24,7 @@ namespace SharpEngine.Solids
             this.color = new float[3] { 1.0f, 1.0f, 1.0f };
         }
 
-        public override void Render()
+        protected override void RenderBody()
         {
             GL.Color3(color) ;
 
