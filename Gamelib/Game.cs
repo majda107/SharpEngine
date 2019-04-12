@@ -39,7 +39,7 @@ namespace SharpEngine.Gamelib
 
             this.testSolid = new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8);
             this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
-            this.testCube.color = new float[]{ 0.4f, 0.8f, 0.2f};
+            this.testCube.color = new float[]{ 0.4f, 0.8f, 0.2f, 0.5f};
         }
 
         public void Start()
@@ -80,7 +80,7 @@ namespace SharpEngine.Gamelib
             this.camera.ProcessKeys(this.keyboardProcessor);
             this.camera.Update();
 
-            this.testSolid.Render();
+            this.testSolid.Render();            
             this.testCube.Render();
 
             gw.SwapBuffers();
@@ -91,6 +91,7 @@ namespace SharpEngine.Gamelib
             GL.ClearColor(0.8f, 0.0f, 0.0f, 0.0f);
 
             GL.Enable(EnableCap.DepthTest);
+            GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.ColorMaterial);
             GL.Enable(EnableCap.Lighting);
 
@@ -99,6 +100,8 @@ namespace SharpEngine.Gamelib
             GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 0.9f, 0.6f, 0.6f });
 
             GL.Enable(EnableCap.Light0);
+
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
         }
     }
 }
