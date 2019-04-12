@@ -19,7 +19,7 @@ namespace SharpEngine.Solids
             this.width = width;
             this.height = height;
             this.depth = depth;
-            this.color = new float[4] { 1.0f, 1.0f, 1.0f, 0.0f };
+            this.color = new float[4] { 1.0f, 1.0f, 1.0f, 1.0f };
         }
 
         protected override void RenderBody()
