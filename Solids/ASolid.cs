@@ -23,8 +23,8 @@ namespace SharpEngine.Solids
         }
         public void Render()
         {
-            if (hitbox != null && hitbox.visible) hitbox.Render();
             if (visible) RenderBody();
+            if (hitbox != null && hitbox.visible) hitbox.Render();
         }
         protected abstract void RenderBody();
     }
