@@ -39,7 +39,7 @@ namespace SharpEngine.Gamelib
 
             this.testSolid = new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8);
             this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
-            this.testCube.color = new float[]{ 1.0f, 0.2f, 0.2f};
+            this.testCube.color = new float[]{ 0.4f, 0.8f, 0.2f};
         }
 
         public void Start()
@@ -91,11 +91,12 @@ namespace SharpEngine.Gamelib
             GL.ClearColor(0.8f, 0.0f, 0.0f, 0.0f);
 
             GL.Enable(EnableCap.DepthTest);
+            GL.Enable(EnableCap.ColorMaterial);
             GL.Enable(EnableCap.Lighting);
 
-            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 10.0f, 10.0f, -10.0f });
-            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 1.0f, 1.0f, 1.0f });
-            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 1.0f, 1.0f, 1.0f });
+            GL.Light(LightName.Light0, LightParameter.Position, new float[] { 20.0f, 0.0f, -10.0f });
+            GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 0.8f, 0.8f, 0.8f });
+            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 0.9f, 0.6f, 0.6f });
 
             GL.Enable(EnableCap.Light0);
         }
