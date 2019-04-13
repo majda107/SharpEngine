@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="Gamelib\AHitbox.cs" />
     <Compile Include="Gamelib\Hitbox.cs" />
+    <Compile Include="ObjLoader\Face3.cs" />
+    <Compile Include="ObjLoader\ObjLoader.cs" />
     <Compile Include="Processors\AKeyProcessor.cs" />
     <Compile Include="Processors\AMouseProcessor.cs" />
     <Compile Include="Gamelib\Game.cs" />
@@ -62,11 +64,14 @@
     <Compile Include="Solids\ASolid.cs" />
     <Compile Include="Solids\BlockSolid.cs" />
     <Compile Include="Solids\CubeSolid.cs" />
+    <Compile Include="Solids\Solid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="cube.obj" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,6 +8,7 @@ using OpenTK.Graphics.OpenGL;
 using SharpEngine.Render;
 using SharpEngine.Solids;
 using SharpEngine.Processors;
+using SharpEngine.ObjLoader;
 using OpenTK.Input;
 
 namespace SharpEngine.Gamelib
@@ -27,6 +28,7 @@ namespace SharpEngine.Gamelib
 
         public BlockSolid testSolid { get; private set; }
         public CubeSolid testCube { get; private set; }
+        public Solid testObject { get; private set; }
 
         public Game(GameWindow gw, double frameRate)
         {
@@ -40,6 +42,8 @@ namespace SharpEngine.Gamelib
             this.testSolid = new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8);
             this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
             this.testCube.color = new float[]{ 0.4f, 0.8f, 0.2f, 0.5f};
+
+            this.testObject = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\cube.obj", new Vector3(-16, 0, 0));
         }
 
         public void Start()
@@ -80,10 +84,13 @@ namespace SharpEngine.Gamelib
             this.camera.ProcessKeys(this.keyboardProcessor);
             this.camera.Update();
 
+            this.testSolid.visible = true;
             this.testSolid.hitbox.visible = true;
             this.testSolid.Render();   
 
             this.testCube.Render();
+
+            this.testObject.Render();
 
             gw.SwapBuffers();
         }
