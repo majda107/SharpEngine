@@ -15,10 +15,11 @@ Simple **OpenGL-based** engine written completely in C#.
 * Configurable lightning 
 * Transparency
 * Basic hitbox rendering
+* .obj loader (alpha stage done at 3AM, will clean later...)
 
 ## Planned implementations ##
 
-* .obj loader
+* Implement .mtl loader to .obj loader for textures
 * Separated cameras (both first and third person)
 * On-screen display (crosshair, stats...)
 * Font to texture loader
