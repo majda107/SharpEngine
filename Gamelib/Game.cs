@@ -43,8 +43,8 @@ namespace SharpEngine.Gamelib
             this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
             this.testCube.color = new float[]{ 0.4f, 0.8f, 0.2f, 0.5f};
 
-            this.testObject = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\spider.obj", new Vector3(-1000, 0, 0));
-            this.testObject.scale = new Vector3(0.05f, 0.05f, 0.05f);
+            this.testObject = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\spider.obj", new Vector3(0, 0, 0));
+            //this.testObject.scale = new Vector3(0.05f, 0.05f, 0.05f);
         }
 
         public void Start()
@@ -69,7 +69,7 @@ namespace SharpEngine.Gamelib
         private void CreatePerspectiveProjection(float angle)
         {
             GL.MatrixMode(MatrixMode.Projection);
-            Matrix4 perspective = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(angle), (float)gw.Width / (float)gw.Height, 1.0f, 100.0f);
+            Matrix4 perspective = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(angle), (float)gw.Width / (float)gw.Height, 1.0f, 10000.0f);
             GL.LoadMatrix(ref perspective);
         }
 
@@ -91,6 +91,7 @@ namespace SharpEngine.Gamelib
 
             this.testCube.Render();
 
+            this.testObject.hitbox.visible = true;
             this.testObject.Render();
 
             gw.SwapBuffers();
