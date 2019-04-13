@@ -43,7 +43,8 @@ namespace SharpEngine.Gamelib
             this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
             this.testCube.color = new float[]{ 0.4f, 0.8f, 0.2f, 0.5f};
 
-            this.testObject = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\cube.obj", new Vector3(-16, 0, 0));
+            this.testObject = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\spider.obj", new Vector3(-1000, 0, 0));
+            this.testObject.scale = new Vector3(0.05f, 0.05f, 0.05f);
         }
 
         public void Start()
