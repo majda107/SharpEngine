@@ -14,13 +14,11 @@ namespace SharpEngine.Solids
         public int width { get; private set; }
         public int height { get; private set; }
         public int depth { get; private set; }
-        public BlockSolid(Vector3 pos, int width, int height, int depth)
+        public BlockSolid(Vector3 pos, int width, int height, int depth) : base(pos)
         {
-            this.pos = pos;
             this.width = width;
             this.height = height;
             this.depth = depth;
-            this.color = new float[4] { 1.0f, 1.0f, 1.0f, 1.0f };
 
             this.hitbox = new Hitbox(new Vector3(pos.X + width / 2, pos.Y - height/2, pos.Z - depth / 2), new Vector3(pos.X - width / 2, pos.Y + height / 2, pos.Z + depth / 2));
         }

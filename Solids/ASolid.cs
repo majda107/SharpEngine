@@ -20,13 +20,16 @@ namespace SharpEngine.Solids
 
 
         public AHitbox hitbox { get; set; }
-        public ASolid()
+        public ASolid(Vector3 pos)
         {
+            this.pos = pos;
             this.hitbox = null;
 
             this.scale = new Vector3(1.0f, 1.0f, 1.0f);
             this.angles = new Vector3(0.0f, 0.0f, 0.0f);
             this.visible = true;
+
+            this.color = new float[4] { 1.0f, 1.0f, 1.0f, 1.0f };
         }
         public void Render()
         {
