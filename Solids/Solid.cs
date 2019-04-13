@@ -28,9 +28,9 @@ namespace SharpEngine.Solids
             float close = faces[0].vertices[0].Z;
             float distant = faces[0].vertices[0].Z;
 
-            foreach(Face3 face in faces)
+            foreach (Face3 face in faces)
             {
-                foreach(Vector3 vertex in face.vertices)
+                foreach (Vector3 vertex in face.vertices)
                 {
                     if (vertex.X > left) left = vertex.X;
                     if (vertex.X < right) right = vertex.X;
@@ -41,7 +41,7 @@ namespace SharpEngine.Solids
                 }
             }
 
-            return new Hitbox(new Vector3(left, bottom, close), new Vector3(right, top, distant));
+            return new Hitbox(new Vector3(left, bottom, close) + pos, new Vector3(right, top, distant) + pos);
         }
         protected override void RenderBody()
         {
