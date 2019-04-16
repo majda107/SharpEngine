@@ -10,11 +10,14 @@ namespace SharpEngine.ObjLoader
 {
     static class ObjLoader
     {
-        public static Solids.Solid LoadObj(string pathToObj, Vector3 pos)
+        public static Solids.Solid LoadObj(string pathToFolder, string fileName, Vector3 pos)
         {
+            Material mat = null;
             VertexBuffer vb = new VertexBuffer();
+            MaterialBuffer materialBuffer = null;
+
             List<Face3> faces = new List<Face3>();
-            string[] lines = File.ReadAllLines(pathToObj);
+            string[] lines = File.ReadAllLines(pathToFolder + "/" + fileName);
             foreach(string line in lines)
             {
                 string[] split = line.Split(' ');
@@ -37,11 +40,11 @@ namespace SharpEngine.ObjLoader
 
                         if (split[1].Contains("//"))
                         {
-                            for (int i = 1; i < split.Length; i++)
+                            for (int i = 1; i < split.Length - 1; i++)
                             {
                                 string[] index = split[i].Split(("//").ToCharArray());
                                 faceVertices[i - 1] = vb.vertices[int.Parse(index[0]) - 1];
-                                faceNormals[i - 1] = vb.normals[int.Parse(index[1]) - 1];
+                                faceNormals[i - 1] = vb.normals[int.Parse(index[2]) - 1];
                             }
                         }
                         else
@@ -55,7 +58,17 @@ namespace SharpEngine.ObjLoader
                             }
                         }
                         
-                        faces.Add(new Face3(faceVertices, faceTextures, faceNormals));
+                        faces.Add(new Face3(faceVertices, faceTextures, faceNormals, mat));
+                        break;
+
+                    case "mtllib":
+                        materialBuffer = MtlLoader.LoadMaterial(pathToFolder + "/" + split[1]);
+                        break;
+                    case "usemtl":
+                        if(materialBuffer != null)
+                        {
+                            mat = materialBuffer.materials.FirstOrDefault(t => t.name == split[1]);
+                        }
                         break;
                 }
             }

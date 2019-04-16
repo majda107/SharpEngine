@@ -50,6 +50,9 @@
     <Compile Include="Gamelib\AHitbox.cs" />
     <Compile Include="Gamelib\Hitbox.cs" />
     <Compile Include="ObjLoader\Face3.cs" />
+    <Compile Include="ObjLoader\Material.cs" />
+    <Compile Include="ObjLoader\MaterialBuffer.cs" />
+    <Compile Include="ObjLoader\MtlLoader.cs" />
     <Compile Include="ObjLoader\ObjLoader.cs" />
     <Compile Include="ObjLoader\VertexBuffer.cs" />
     <Compile Include="Processors\AKeyProcessor.cs" />
