@@ -61,6 +61,11 @@ namespace SharpEngine.Solids
             {
                 for(int i = 0; i < 3; i++)
                 {
+                    if(face.material != null)
+                    {
+                        face.material.Load(); // polish later!
+                    }
+                        
                     GL.Vertex3(face.vertices[i] + pos);
                     GL.Normal3(face.normals[i]);
                     GL.TexCoord2(face.textures[i]);
