@@ -54,6 +54,7 @@
     <Compile Include="ObjLoader\MaterialBuffer.cs" />
     <Compile Include="ObjLoader\MtlLoader.cs" />
     <Compile Include="ObjLoader\ObjLoader.cs" />
+    <Compile Include="ObjLoader\TextureLoader.cs" />
     <Compile Include="ObjLoader\VertexBuffer.cs" />
     <Compile Include="Processors\AKeyProcessor.cs" />
     <Compile Include="Processors\AMouseProcessor.cs" />
@@ -72,11 +73,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="spider.obj" />
-    <None Include="cube.obj" />
+    <None Include="TestModels\Spider\spider.obj" />
+    <None Include="TestModels\cube.obj" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TestModels\Spider\drkwood2.jpg" />
+    <Content Include="TestModels\Spider\engineflare1.jpg" />
+    <Content Include="TestModels\Spider\SpiderTex.jpg" />
+    <Content Include="TestModels\Spider\wal67ar_small.jpg" />
+    <Content Include="TestModels\Spider\wal69ar_small.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
