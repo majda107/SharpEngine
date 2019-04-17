@@ -9,18 +9,21 @@ namespace SharpEngine.ObjLoader
 {
     class MtlLoader
     {
-        public static MaterialBuffer LoadMaterial(string path)
+        public static MaterialBuffer LoadMaterial(string path, string fileName)
         {
-            List<Material> materials = new List<Material>();
+            MaterialBuffer materialBuffer = new MaterialBuffer();
+            Material tempMaterial = null;
 
-            string[] lines = File.ReadAllLines(path);
+            List<float> materialParams = new List<float>();
+
+            string[] lines = File.ReadAllLines(path + "/" + fileName);
+
             foreach(string line in lines)
             {
                 string[] split = line.Split(' ');
 
-                List<float> materialParams = new List<float>();
-
-                for(int i = 1; i < split.Length; i++)
+                materialParams = new List<float>();
+                for (int i = 1; i < split.Length; i++)
                 {
                     float val;
                     if(float.TryParse(split[i], out val))
@@ -32,30 +35,34 @@ namespace SharpEngine.ObjLoader
                 switch(split[0])
                 {
                     case "newmtl":
-                        materials.Add(new Material(split[1]));
+                        tempMaterial = new Material(split[1]);
+                        materialBuffer.Add(tempMaterial);
                         break;
                     case "Ka":
-                        materials.Last().Ka = materialParams.ToArray();
+                        tempMaterial.Ka = materialParams.ToArray();
                         break;
                     case "Kd":
-                        materials.Last().Kd = materialParams.ToArray();
+                        tempMaterial.Kd = materialParams.ToArray();
                         break;
                     case "Ks":
-                        materials.Last().Ks = materialParams.ToArray();
+                        tempMaterial.Ks = materialParams.ToArray();
                         break;
                     case "d":
-                        materials.Last().d = materialParams.ToArray()[0];
+                        tempMaterial.d = materialParams.ToArray()[0];
                         break;
                     case "Tr":
-                        materials.Last().d = materialParams.ToArray()[0];
+                        tempMaterial.d = materialParams.ToArray()[0];
                         break;
                     case "s":
-                        materials.Last().d = materialParams.ToArray()[0];
+                        tempMaterial.d = materialParams.ToArray()[0];
+                        break;
+                    case "map_Kd":
+                        tempMaterial.textureID = TextureLoader.LoadFromPath(path + "/" + split[1].Replace(@".\", ""));
                         break;
                 }
             }
 
-            return new MaterialBuffer(materials.ToArray());
+            return materialBuffer;
         }
     }
 }
