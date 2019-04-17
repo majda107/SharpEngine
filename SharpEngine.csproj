@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Gamelib\AHitbox.cs" />
     <Compile Include="Gamelib\Hitbox.cs" />
+    <Compile Include="GameManager\GameObjectManager.cs" />
     <Compile Include="ObjLoader\Face3.cs" />
     <Compile Include="ObjLoader\Material.cs" />
     <Compile Include="ObjLoader\MaterialBuffer.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="Processors\AKeyProcessor.cs" />
     <Compile Include="Processors\AMouseProcessor.cs" />
     <Compile Include="Gamelib\Game.cs" />
-    <Compile Include="Gamelib\AGameObject.cs" />
+    <Compile Include="GameManager\AGameObject.cs" />
     <Compile Include="Processors\KeyboardProcessor.cs" />
     <Compile Include="Processors\MouseProcessor.cs" />
     <Compile Include="Program.cs" />
