@@ -9,7 +9,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace SharpEngine.Render
 {
-    abstract class ACamera : Gamelib.AGameObject
+    abstract class ACamera : GameManager.AGameObject
     {
         /// <summary>
         /// Main LookAt camera matrix
