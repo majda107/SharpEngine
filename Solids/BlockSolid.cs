@@ -33,14 +33,18 @@ namespace SharpEngine.Solids
             GL.Rotate(this.angles.Y, Vector3.UnitX);
             GL.Rotate(this.angles.Z, Vector3.UnitZ);
 
-            GL.Color4(color) ;
+            GL.Color4(color);
 
             GL.Begin(PrimitiveType.Quads);
 
             GL.Normal3(-1.0, 0.0, 0.0);
+            GL.TexCoord2(1, 1); // debug
             GL.Vertex3(pos.X + -width / 2, pos.Y + height / 2, pos.Z + depth / 2);
+            GL.TexCoord2(1, 0); // debug
             GL.Vertex3(pos.X + -width / 2, pos.Y + height / 2, pos.Z + -depth / 2);
+            GL.TexCoord2(0, 1); // debug
             GL.Vertex3(pos.X + -width / 2, pos.Y + -height / 2, pos.Z + -depth / 2);
+            GL.TexCoord2(0, 0);  // debug
             GL.Vertex3(pos.X + -width / 2, pos.Y + -height / 2, pos.Z + depth / 2);
 
             GL.Normal3(1.0, 0.0, 0.0);

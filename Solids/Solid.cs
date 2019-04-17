@@ -43,6 +43,7 @@ namespace SharpEngine.Solids
 
             return new Hitbox(new Vector3(left, bottom, close) + pos, new Vector3(right, top, distant) + pos);
         }
+
         protected override void RenderBody()
         {
             GL.PushMatrix();
@@ -55,24 +56,24 @@ namespace SharpEngine.Solids
 
             GL.Color4(color);
 
-            GL.Begin(PrimitiveType.Triangles);
-
             foreach (Face3 face in faces)
             {
-                for(int i = 0; i < 3; i++)
+                if (face.material != null) face.material.Load(); // load material values
+                GL.BindTexture(TextureTarget.Texture2D, face.material.textureID); // bind material texture
+
+                GL.Begin(PrimitiveType.Triangles); // begin polygon drawing
+
+                for (int i = 0; i < 3; i++)
                 {
-                    if(face.material != null)
-                    {
-                        face.material.Load(); // polish later!
-                    }
-                        
-                    GL.Vertex3(face.vertices[i] + pos);
                     GL.Normal3(face.normals[i]);
                     GL.TexCoord2(face.textures[i]);
+                    GL.Vertex3(face.vertices[i] + pos);
                 }
-            }
 
-            GL.End();
+                GL.End();
+
+                GL.BindTexture(TextureTarget.Texture2D, 0);
+            }
 
             GL.PopMatrix();
         }
