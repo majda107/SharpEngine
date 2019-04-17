@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="TestModels\Spider\spider.mtl" />
     <None Include="TestModels\Spider\spider.obj" />
     <None Include="TestModels\cube.obj" />
     <None Include="OpenTK.dll.config" />
