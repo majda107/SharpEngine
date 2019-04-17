@@ -70,7 +70,7 @@ namespace SharpEngine.Gamelib
 
             GL.End();
         }
-        public void Collide(AHitbox hitbox)
+        public bool Collide(AHitbox hitbox)
         {
             // Basically compare first and seconds positions of both hitboxes, too much math to do at 1 AM...
             throw new NotImplementedException();

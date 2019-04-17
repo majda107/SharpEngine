@@ -20,7 +20,7 @@ namespace SharpEngine.GameManager
             this.GameSolids.Add(gameObject);
         }
 
-        private void CheckCollisions()
+        public void CheckCollisions()
         {
             for(int i = 0; i < GameSolids.Count; i++)
             {
