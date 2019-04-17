@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpEngine.Gamelib;
+using SharpEngine.GameManager;
 using OpenTK;
 
 namespace SharpEngine.Solids
@@ -40,5 +41,10 @@ namespace SharpEngine.Solids
             }
         }
         protected abstract void RenderBody();
+
+        public bool Collide(ASolid solid)
+        {
+            return this.hitbox.Collide(solid.hitbox);
+        }
     }
 }
