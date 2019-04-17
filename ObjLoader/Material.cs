@@ -18,6 +18,8 @@ namespace SharpEngine.ObjLoader
         public float Tr;
         public float s;
 
+        public int textureID;
+
         public Material(string name)
         {
             this.name = name;
@@ -29,6 +31,8 @@ namespace SharpEngine.ObjLoader
             this.d = 1.0f;
             this.Tr = 0;
             this.s = 0;
+
+            this.textureID = 0;
         }
         public void Load()
         {
