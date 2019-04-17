@@ -3,7 +3,7 @@
 Simple **OpenGL-based** engine written completely in C#.
 
 ![Screenshot-01](Images/screenshot01.jpg?raw=true "Screenshot-01")
-![Screenshot-02](Images/screenshot02.jpg?raw=true "Screenshot-02")
+![Screenshot-02](Images/screenshot02.jpg?raw=true =300x "Screenshot-02")
 
 *Please keep in mind, that this project is in development state!* 
 
