@@ -9,6 +9,7 @@ using SharpEngine.Render;
 using SharpEngine.Solids;
 using SharpEngine.Processors;
 using SharpEngine.ObjLoader;
+using SharpEngine.GameManager;
 using OpenTK.Input;
 
 namespace SharpEngine.Gamelib
@@ -25,10 +26,9 @@ namespace SharpEngine.Gamelib
         public KeyboardProcessor keyboardProcessor { get; private set; }
         public MouseProcessor mouseProcessor { get; private set; }
 
+        public GameObjectManager GameObjectManager { get; private set; }
 
-        public BlockSolid testSolid { get; private set; }
-        public CubeSolid testCube { get; private set; }
-        public Solid testObject { get; private set; }
+
 
         public Game(GameWindow gw, double frameRate)
         {
@@ -39,11 +39,11 @@ namespace SharpEngine.Gamelib
             this.keyboardProcessor = new KeyboardProcessor();
             this.mouseProcessor = new MouseProcessor();
 
-            this.testSolid = new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8);
-            this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
-            this.testCube.color = new float[]{ 0.4f, 0.8f, 0.2f, 0.5f};
+            this.GameObjectManager = new GameObjectManager();
 
-            this.testObject = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\TestModels\Spider", "spider.obj", new Vector3(-80, 0, 0));
+            GameObjectManager.Add(new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8));
+            GameObjectManager.Add(new CubeSolid(new Vector3(20, 0, 0), 10) { color = new float[] { 0.4f, 0.8f, 0.2f, 0.5f }});
+            GameObjectManager.Add(ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\TestModels\Spider", "spider.obj", new Vector3(-80, 0, 0)));
         }
 
         public void Start()
@@ -56,6 +56,12 @@ namespace SharpEngine.Gamelib
 
             this.gw.KeyDown += (o, e) => this.keyboardProcessor.AddKey(e.Key);
             this.gw.KeyUp += (o, e) => this.keyboardProcessor.RemoveKey(e.Key);
+
+            this.gw.KeyPress += (o, e) =>
+            {
+                if (e.KeyChar == 'h') this.GameObjectManager.SetDebugMode(true);
+                else if (e.KeyChar == 'j') this.GameObjectManager.SetDebugMode(false);
+            };
 
             this.gw.Run(1 / this.frameRate);
         }
@@ -84,14 +90,7 @@ namespace SharpEngine.Gamelib
             this.camera.ProcessKeys(this.keyboardProcessor);
             this.camera.Update();
 
-            this.testSolid.visible = true;
-            this.testSolid.hitbox.visible = false;
-            this.testSolid.Render();   
-
-            this.testCube.Render();
-
-            this.testObject.hitbox.visible = true;
-            this.testObject.Render();
+            this.GameObjectManager.RenderAll();
 
             gw.SwapBuffers();
         }
