@@ -11,8 +11,10 @@ namespace SharpEngine.Gamelib
     abstract class AHitbox
     {
         public bool visible { get; set; }
+        protected bool lastCollision { get; private set; }
         public AHitbox()
         {
+            this.lastCollision = false;
             this.offset = 0.2f;
             this.visible = false;
         }
@@ -29,6 +31,8 @@ namespace SharpEngine.Gamelib
         public void Render()
         {
             GL.Color4(0.3, 0.3, 0.7, 0.4);
+            if(lastCollision)
+                GL.Color4(0.7, 0.3, 0.3, 0.4);
 
             GL.Begin(PrimitiveType.Quads);
 
@@ -69,11 +73,19 @@ namespace SharpEngine.Gamelib
             GL.Vertex3(second.X, first.Y - offset, second.Z);
 
             GL.End();
+
+            this.lastCollision = false;
         }
         public bool Collide(AHitbox hitbox)
         {
-            // Basically compare first and seconds positions of both hitboxes, too much math to do at 1 AM...
-            throw new NotImplementedException();
+            if((this.second.X < hitbox.first.X && this.first.X > hitbox.second.X) &&
+                (this.second.Y > hitbox.first.Y && this.first.Y < hitbox.second.Y) &&
+                (this.second.Z > hitbox.first.Z && this.first.Z < hitbox.second.Z))
+            {
+                this.lastCollision = true;
+                return true;
+            }
+            return false;
         }
     }
 }
