@@ -62,7 +62,7 @@ namespace SharpEngine.ObjLoader
                         break;
 
                     case "mtllib":
-                        materialBuffer = MtlLoader.LoadMaterial(pathToFolder + "/" + split[1]);
+                        materialBuffer = MtlLoader.LoadMaterial(pathToFolder, split[1]);
                         break;
                     case "usemtl":
                         if(materialBuffer != null)
