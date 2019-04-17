@@ -42,7 +42,7 @@ namespace SharpEngine.Gamelib
             this.GameObjectManager = new GameObjectManager();
 
             GameObjectManager.Add(new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8));
-            GameObjectManager.Add(new CubeSolid(new Vector3(20, 0, 0), 10) { color = new float[] { 0.4f, 0.8f, 0.2f, 0.5f }});
+            GameObjectManager.Add(new CubeSolid(new Vector3(0, 0, 20), 10) { color = new float[] { 0.4f, 0.8f, 0.2f, 0.5f }});
             GameObjectManager.Add(ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\TestModels\Spider", "spider.obj", new Vector3(-80, 0, 0)));
         }
 
@@ -90,6 +90,7 @@ namespace SharpEngine.Gamelib
             this.camera.ProcessKeys(this.keyboardProcessor);
             this.camera.Update();
 
+            this.GameObjectManager.CheckCollisions();
             this.GameObjectManager.RenderAll();
 
             gw.SwapBuffers();
