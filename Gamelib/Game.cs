@@ -43,7 +43,7 @@ namespace SharpEngine.Gamelib
             this.testCube = new CubeSolid(new Vector3(20, 0, 0), 10);
             this.testCube.color = new float[]{ 0.4f, 0.8f, 0.2f, 0.5f};
 
-            this.testObject = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\", "spider.obj", new Vector3(-80, 0, 0));
+            this.testObject = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\TestModels\Spider", "spider.obj", new Vector3(-80, 0, 0));
         }
 
         public void Start()
@@ -85,7 +85,7 @@ namespace SharpEngine.Gamelib
             this.camera.Update();
 
             this.testSolid.visible = true;
-            this.testSolid.hitbox.visible = true;
+            this.testSolid.hitbox.visible = false;
             this.testSolid.Render();   
 
             this.testCube.Render();
@@ -103,13 +103,15 @@ namespace SharpEngine.Gamelib
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.ColorMaterial);
+            
             GL.Enable(EnableCap.Lighting);
 
             GL.Light(LightName.Light0, LightParameter.Position, new float[] { 20.0f, 0.0f, -10.0f });
             GL.Light(LightName.Light0, LightParameter.Diffuse, new float[] { 0.8f, 0.8f, 0.8f });
-            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 0.9f, 0.6f, 0.6f });
+            GL.Light(LightName.Light0, LightParameter.Ambient, new float[] { 0.6f, 0.6f, 0.6f });
 
             GL.Enable(EnableCap.Light0);
+            GL.Enable(EnableCap.Texture2D);
 
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
         }
