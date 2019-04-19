@@ -12,11 +12,11 @@ namespace SharpEngine.Gamelib
     {
         public bool visible { get; set; }
         protected bool lastCollision { get; private set; }
-        public AHitbox()
+        public AHitbox(bool visible)
         {
             this.lastCollision = false;
             this.offset = 0.2f;
-            this.visible = false;
+            this.visible = visible;
         }
         /// <summary>
         /// Defines left - bottom - close coord of hitbox 
