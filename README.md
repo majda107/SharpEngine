@@ -29,3 +29,4 @@ Simple **OpenGL-based** engine written completely in C#.
 * On-screen display (crosshair, stats...)
 * Font to texture loader
 * Fix hitbox rendering related to solid rotation
+* Pivot and solid rotation
