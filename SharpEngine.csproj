@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gamelib\AHitbox.cs" />
+    <Compile Include="Gamelib\CollisionEventArgs.cs" />
     <Compile Include="Gamelib\Hitbox.cs" />
     <Compile Include="GameManager\GameObjectManager.cs" />
     <Compile Include="ObjLoader\Face3.cs" />
@@ -57,6 +58,8 @@
     <Compile Include="ObjLoader\ObjLoader.cs" />
     <Compile Include="ObjLoader\TextureLoader.cs" />
     <Compile Include="ObjLoader\VertexBuffer.cs" />
+    <Compile Include="Physics\APhysicElement.cs" />
+    <Compile Include="Physics\RigidBody.cs" />
     <Compile Include="Processors\AKeyProcessor.cs" />
     <Compile Include="Processors\AMouseProcessor.cs" />
     <Compile Include="Gamelib\Game.cs" />
