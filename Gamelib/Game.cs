@@ -11,6 +11,7 @@ using SharpEngine.Processors;
 using SharpEngine.ObjLoader;
 using SharpEngine.GameManager;
 using OpenTK.Input;
+using SharpEngine.Physics;
 
 namespace SharpEngine.Gamelib
 {
@@ -30,6 +31,7 @@ namespace SharpEngine.Gamelib
 
 
 
+        public Solid spider;
         public Game(GameWindow gw, double frameRate)
         {
             this.gw = gw;
@@ -43,7 +45,20 @@ namespace SharpEngine.Gamelib
 
             GameObjectManager.Add(new BlockSolid(new Vector3(0, 0, 0), 10, 14, 8));
             GameObjectManager.Add(new CubeSolid(new Vector3(0, 0, 20), 10) { color = new float[] { 0.4f, 0.8f, 0.2f, 0.5f }});
-            GameObjectManager.Add(ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\TestModels\Spider", "spider.obj", new Vector3(-80, 0, 0)));
+            BlockSolid platform = new BlockSolid(new Vector3(0, -80, 0), 400, 2, 400);
+            platform.color = new float[4] { 0.2f, 0.6f, 0.2f, 1.0f };
+
+            platform.Collision += (o, e) =>
+            {
+                (e.solid.physicElements[0] as RigidBody).Gravity = false;
+            };
+
+            GameObjectManager.Add(platform);
+
+            spider = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\TestModels\Spider", "spider.obj", new Vector3(-80, 0, 0));
+            spider.physicElements.Add(new RigidBody());
+            (spider.physicElements[0] as RigidBody).Gravity = false;
+            GameObjectManager.Add(spider);
         }
 
         public void Start()
@@ -59,8 +74,18 @@ namespace SharpEngine.Gamelib
 
             this.gw.KeyPress += (o, e) =>
             {
-                if (e.KeyChar == 'h') this.GameObjectManager.SetDebugMode(true);
-                else if (e.KeyChar == 'j') this.GameObjectManager.SetDebugMode(false);
+                switch (e.KeyChar)
+                {
+                    case 'h':
+                        this.GameObjectManager.SetDebugMode(true);
+                        break;
+                    case 'j':
+                        this.GameObjectManager.SetDebugMode(false);
+                        break;
+                    case 'g':
+                        (spider.physicElements[0] as RigidBody).Gravity = true;
+                        break;
+                }
             };
 
             this.gw.Run(1 / this.frameRate);
@@ -90,7 +115,8 @@ namespace SharpEngine.Gamelib
             this.camera.ProcessKeys(this.keyboardProcessor);
             this.camera.Update();
 
-            this.GameObjectManager.CheckCollisions();
+            this.GameObjectManager.CheckCollisions(); // polish later!
+            this.GameObjectManager.UpdateAll();
             this.GameObjectManager.RenderAll();
 
             gw.SwapBuffers();
