@@ -9,7 +9,7 @@ namespace SharpEngine.Gamelib
 {
     class Hitbox : AHitbox
     {
-        public Hitbox(Vector3 first, Vector3 second)
+        public Hitbox(Vector3 first, Vector3 second, bool visible) : base(visible)
         {
             this.first = first;
             this.second = second;
