@@ -38,8 +38,8 @@ namespace SharpEngine.GameManager
         {
             foreach(ASolid solid in GameSolids)
             {
-                if(debug) solid.hitbox.visible = true;
-                else solid.hitbox.visible = false;
+                if (debug) solid.debug = true;
+                else solid.debug = false;
             }
         }
 
@@ -48,6 +48,14 @@ namespace SharpEngine.GameManager
             foreach (ASolid solid in GameSolids)
             {
                 solid.Render();
+            }
+        }
+
+        public void UpdateAll()
+        {
+            foreach(ASolid solid in GameSolids)
+            {
+                solid.Update();
             }
         }
     }
