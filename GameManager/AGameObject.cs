@@ -9,6 +9,6 @@ namespace SharpEngine.GameManager
 {
     abstract class AGameObject
     {
-        protected Vector3 pos;
+        public Vector3 pos;
     }
 }
