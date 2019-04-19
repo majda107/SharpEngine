@@ -9,15 +9,26 @@ namespace SharpEngine.Physics
 {
     class RigidBody : APhysicElement
     {
-        public bool Gravity { get; set; }
+        private bool _gravity;
+        public bool Gravity
+        {
+            get => _gravity; 
+            set
+            {
+                _gravity = value;
+                speed = Speed;
+            }
+        }
 
-        public float speed;
+        public float Speed { get; set; }
+        private float speed;
         public float gravity;
 
         public RigidBody()
         {
             this.Gravity = true;
-            this.speed = 0.05f;
+            this.Speed = 0.05f;
+            this.speed = Speed;
             this.gravity = 4f;
         }
         public override void Update(ASolid solid)

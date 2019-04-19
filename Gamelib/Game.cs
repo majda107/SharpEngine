@@ -85,6 +85,9 @@ namespace SharpEngine.Gamelib
                     case 'g':
                         (spider.physicElements[0] as RigidBody).Gravity = true;
                         break;
+                    case 't':
+                        spider.pos += new Vector3(0, 100, 0);
+                        break;
                 }
             };
 
