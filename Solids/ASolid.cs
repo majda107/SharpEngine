@@ -48,18 +48,21 @@ namespace SharpEngine.Solids
                 hitbox.Render();
             }
         }
+ 
+        protected abstract void UpdateHitbox();
+        protected abstract void UpdateVertices();
+        protected abstract void RenderBody();
 
-        protected abstract Hitbox UpdateHitbox(ref Face3[] faces);
         public void Update()
         {
-            this.hitbox = UpdateHitbox(ref faces);
-            foreach(APhysicElement element in this.physicElements)
+            this.UpdateVertices(); // update position
+            this.UpdateHitbox(); // generate new hitbox
+
+            foreach(APhysicElement element in this.physicElements) // apply physics
             {
                 element.Update(this);
             }
         }
-
-        protected abstract void RenderBody();
 
         public bool Collide(ASolid solid)
         {

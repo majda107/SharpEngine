@@ -21,7 +21,7 @@ namespace SharpEngine.Solids
             this.height = height;
             this.depth = depth;
 
-            this.hitbox = new Hitbox(new Vector3(pos.X + width / 2, pos.Y - height / 2, pos.Z - depth / 2), new Vector3(pos.X - width / 2, pos.Y + height / 2, pos.Z + depth / 2), this.debug);
+            this.UpdateHitbox();
         }
 
         protected override void RenderBody()
@@ -77,9 +77,14 @@ namespace SharpEngine.Solids
             GL.PopMatrix();
         }
 
-        protected override Hitbox UpdateHitbox(ref Face3[] faces)
+        protected override void UpdateHitbox()
         {
-            return new Hitbox(new Vector3(pos.X + width / 2, pos.Y - height / 2, pos.Z - depth / 2), new Vector3(pos.X - width / 2, pos.Y + height / 2, pos.Z + depth / 2), this.debug);
+            this.hitbox = new Hitbox(new Vector3(pos.X + width / 2, pos.Y - height / 2, pos.Z - depth / 2), new Vector3(pos.X - width / 2, pos.Y + height / 2, pos.Z + depth / 2), this.debug);
+        }
+
+        protected override void UpdateVertices()
+        {
+            // implement later
         }
     }
 }

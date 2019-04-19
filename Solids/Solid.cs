@@ -12,15 +12,21 @@ namespace SharpEngine.Solids
 {
     class Solid : ASolid
     {
-        
+        // field used for storing pos deviation
+        private Vector3 prevPos;
+
         public Solid(Face3[] faces, Vector3 pos) : base(pos)
         {
+            // deviation = pos, reason for 0 0 0 
+            this.prevPos = new Vector3(0, 0, 0);
             this.faces = faces;
-            this.hitbox = UpdateHitbox(ref faces);
+
+            this.UpdateHitbox();
         }
 
-        protected override Hitbox UpdateHitbox(ref Face3[] faces)
+        protected override void UpdateHitbox()
         {
+            // maybe add some checking if update is really needed? Won't implement this until rotation via pivot is implemented tho...
             float left = faces[0].vertices[0].X;
             float right = faces[0].vertices[0].X;
             float top = faces[0].vertices[0].Y;
@@ -41,7 +47,23 @@ namespace SharpEngine.Solids
                 }
             }
 
-            return new Hitbox(new Vector3(left, bottom, close) + pos, new Vector3(right, top, distant) + pos, this.debug);
+            this.hitbox = new Hitbox(new Vector3(left, bottom, close), new Vector3(right, top, distant), this.debug);
+        }
+
+        protected override void UpdateVertices()
+        {
+            Vector3 dev = pos - prevPos;
+            if(dev != new Vector3(0, 0, 0))
+            {
+                for (int i = 0; i < this.faces.Length; i++)
+                {
+                    for (int j = 0; j < this.faces[i].vertices.Length; j++)
+                    {
+                        faces[i].vertices[j] += dev;
+                    }
+                }
+                prevPos = pos;
+            }
         }
 
         protected override void RenderBody()
@@ -52,21 +74,7 @@ namespace SharpEngine.Solids
 
             foreach (Face3 face in faces)
             {
-                if (face.material != null) face.material.Load(); // load material values
-                GL.BindTexture(TextureTarget.Texture2D, face.material.textureID); // bind material texture
-
-                GL.Begin(PrimitiveType.Triangles); // begin polygon drawing
-
-                for (int i = 0; i < 3; i++)
-                {
-                    GL.Normal3(face.normals[i]);
-                    GL.TexCoord2(face.textures[i]);
-                    GL.Vertex3(face.vertices[i] + pos);
-                }
-
-                GL.End();
-
-                GL.BindTexture(TextureTarget.Texture2D, 0);
+                face.Render();
             }
 
             GL.PopMatrix();
