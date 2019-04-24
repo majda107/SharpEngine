@@ -55,7 +55,7 @@ namespace SharpEngine.Gamelib
 
             GameObjectManager.Add(platform);
 
-            spider = ObjLoader.ObjLoader.LoadObj(@"C:\Users\Marián Trpkoš\source\repos\OpenGLmov2\SharpEngine\TestModels\Spider", "spider.obj", new Vector3(-80, 0, 0));
+            spider = ObjLoader.ObjLoader.LoadObj(@"..\..\TestModels\Spider\", "spider.obj", new Vector3(-80, 0, 0));
             spider.physicElements.Add(new RigidBody());
             (spider.physicElements[0] as RigidBody).Gravity = false;
             GameObjectManager.Add(spider);
