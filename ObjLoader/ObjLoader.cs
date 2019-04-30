@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using OpenTK;
+using System.Globalization;
 
 namespace SharpEngine.ObjLoader
 {
@@ -18,19 +19,20 @@ namespace SharpEngine.ObjLoader
 
             List<Face3> faces = new List<Face3>();
             string[] lines = File.ReadAllLines(pathToFolder + "/" + fileName);
+
             foreach(string line in lines)
             {
                 string[] split = line.Split(' ');
                 switch(split[0])
                 {
                     case "v":
-                        vb.vertices.Add(new Vector3(float.Parse(split[1]), float.Parse(split[2]), float.Parse(split[3])));
+                        vb.vertices.Add(new Vector3(float.Parse(split[1], CultureInfo.InvariantCulture), float.Parse(split[2], CultureInfo.InvariantCulture), float.Parse(split[3], CultureInfo.InvariantCulture)));
                         break;
                     case "vt":
-                        vb.textures.Add(new Vector2(float.Parse(split[1]), float.Parse(split[2])));
+                        vb.textures.Add(new Vector2(float.Parse(split[1], CultureInfo.InvariantCulture), float.Parse(split[2], CultureInfo.InvariantCulture)));
                         break;
                     case "vn":
-                        vb.normals.Add(new Vector3(float.Parse(split[1]), float.Parse(split[2]), float.Parse(split[3])));
+                        vb.normals.Add(new Vector3(float.Parse(split[1], CultureInfo.InvariantCulture), float.Parse(split[2], CultureInfo.InvariantCulture), float.Parse(split[3], CultureInfo.InvariantCulture)));
                         break;
                     case "f":
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
 
 namespace SharpEngine.ObjLoader
 {
@@ -26,7 +27,7 @@ namespace SharpEngine.ObjLoader
                 for (int i = 1; i < split.Length; i++)
                 {
                     float val;
-                    if(float.TryParse(split[i], out val))
+                    if(float.TryParse(split[i], NumberStyles.Float, CultureInfo.InvariantCulture, out val))
                     {
                         materialParams.Add(val);
                     }
