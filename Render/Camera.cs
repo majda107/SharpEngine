@@ -13,7 +13,7 @@ namespace SharpEngine.Render
     {
         public Camera()
         {
-            this.pos = new Vector3(0, 0, 0);
+            this.Pos = new Vector3(0, 0, 0);
             this.yaw = 0;
             this.pitch = 0;
             this.sensitivity = 1;
@@ -21,15 +21,21 @@ namespace SharpEngine.Render
         }
 
         /// <summary>
-        /// Camera update each frame
+        /// Camera update if needed
         /// </summary>
-        public override void Update()
+        protected override void Update()
         {
-            this.lookAt = Matrix4.LookAt(pos, new Vector3(pos.X, pos.Y, pos.Z + 1), Vector3.UnitY);
+            this.lookAt = Matrix4.LookAt(this.Pos, new Vector3(this.Pos.X, this.Pos.Y, this.Pos.Z + 1), Vector3.UnitY);
 
             this.lookAt *= Matrix4.CreateRotationY(yaw);
             this.lookAt *= Matrix4.CreateRotationX(pitch);
+        }
 
+        /// <summary>
+        /// Load camera matrix every frame
+        /// </summary>
+        public void Render()
+        {
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadMatrix(ref lookAt);
         }
@@ -38,6 +44,7 @@ namespace SharpEngine.Render
         {
             this.yaw += (float)mouseProcessor.xDev / 400f * sensitivity;
             this.pitch += (float)mouseProcessor.yDev / 400f * sensitivity;
+            this.Update(); // POLISH THIS LATER!!!
         }
 
         public void ProcessKeys(Processors.AKeyProcessor keyProcessor)
@@ -81,13 +88,11 @@ namespace SharpEngine.Render
                 }
             }
 
-            this.pos.Y += toMove.Y; // sets Y position of the camera
+            this.Pos += new Vector3(0.0f, toMove.Y, 0.0f); // sets Y position of the camera
 
-            pos.X = pos.X + (float)(toMove.Z * Math.Cos(yaw + MathHelper.DegreesToRadians(90)));
-            pos.Z = pos.Z + (float)(toMove.Z * Math.Sin(yaw + MathHelper.DegreesToRadians(90)));
+            this.Pos += new Vector3((float)(toMove.Z * Math.Cos(yaw + MathHelper.DegreesToRadians(90))), 0.0f, (float)(toMove.Z * Math.Sin(yaw + MathHelper.DegreesToRadians(90))));
 
-            pos.X = pos.X + (float)(toMove.X * Math.Cos(yaw));
-            pos.Z = pos.Z + (float)(toMove.X * Math.Sin(yaw));
+            this.Pos += new Vector3((float)(toMove.X * Math.Cos(yaw)), 0.0f, (float)(toMove.X * Math.Sin(yaw)));
         }
     }
 }

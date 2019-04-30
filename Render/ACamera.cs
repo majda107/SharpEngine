@@ -28,7 +28,5 @@ namespace SharpEngine.Render
         /// Mouse sensitivity
         /// </summary>
         public float sensitivity;
-
-        public abstract void Update();
     }
 }
