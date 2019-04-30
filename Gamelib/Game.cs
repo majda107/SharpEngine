@@ -51,6 +51,8 @@ namespace SharpEngine.Gamelib
             platform.Collision += (o, e) =>
             {
                 (e.solid.physicElements[0] as RigidBody).Gravity = false;
+                var dev = e.solid.hitbox.first.Y - platform.hitbox.second.Y;
+                e.solid.Pos -= new Vector3(0.0f, dev, 0.0f);
             };
 
             GameObjectManager.Add(platform);
@@ -86,7 +88,7 @@ namespace SharpEngine.Gamelib
                         (spider.physicElements[0] as RigidBody).Gravity = true;
                         break;
                     case 't':
-                        spider.pos += new Vector3(0, 100, 0);
+                        spider.Pos += new Vector3(0, 100, 0);
                         break;
                 }
             };
@@ -116,10 +118,13 @@ namespace SharpEngine.Gamelib
 
             this.camera.ProcessMouse(this.mouseProcessor);
             this.camera.ProcessKeys(this.keyboardProcessor);
-            this.camera.Update();
+            //this.camera.Update();
+            this.camera.Render();
 
-            this.GameObjectManager.CheckCollisions(); // polish later!
-            this.GameObjectManager.UpdateAll();
+            this.GameObjectManager.UpdateAllPhysics();
+
+            this.GameObjectManager.CheckAllCollisions(); // polish later!
+
             this.GameObjectManager.RenderAll();
 
             gw.SwapBuffers();
