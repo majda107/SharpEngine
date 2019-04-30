@@ -20,7 +20,7 @@ namespace SharpEngine.GameManager
             this.GameSolids.Add(gameObject);
         }
 
-        public void CheckCollisions()
+        public void CheckAllCollisions()
         {
             for(int i = 0; i < GameSolids.Count; i++)
             {
@@ -38,8 +38,8 @@ namespace SharpEngine.GameManager
         {
             foreach(ASolid solid in GameSolids)
             {
-                if (debug) solid.debug = true;
-                else solid.debug = false;
+                if (debug) solid.Debug = true;
+                else solid.Debug = false;
             }
         }
 
@@ -51,11 +51,11 @@ namespace SharpEngine.GameManager
             }
         }
 
-        public void UpdateAll()
+        public void UpdateAllPhysics()
         {
-            foreach(ASolid solid in GameSolids)
+            foreach(ASolid solid in this.GameSolids)
             {
-                solid.Update();
+                solid.UpdatePhysics();
             }
         }
     }
