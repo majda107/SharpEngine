@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenTK;
 using SharpEngine.Solids;
 
 namespace SharpEngine.Physics
@@ -35,7 +36,7 @@ namespace SharpEngine.Physics
         {
             if(Gravity)
             {
-                solid.pos.Y -= gravity * speed;
+                solid.Pos = solid.Pos - new Vector3(0.0f, gravity * speed, 0.0f);
                 if (speed < gravity) speed += 0.05f;
             }
         }
