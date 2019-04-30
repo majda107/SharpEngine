@@ -15,7 +15,7 @@ namespace SharpEngine.Solids
         public int width { get; private set; }
         public int height { get; private set; }
         public int depth { get; private set; }
-        public BlockSolid(Vector3 pos, int width, int height, int depth) : base(pos)
+        public BlockSolid(Vector3 pos, int width, int height, int depth) : base(pos, null)
         {
             this.width = width;
             this.height = height;
@@ -34,43 +34,43 @@ namespace SharpEngine.Solids
 
             GL.Normal3(-1.0, 0.0, 0.0);
             GL.TexCoord2(1, 1); // debug
-            GL.Vertex3(pos.X + -width / 2, pos.Y + height / 2, pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + height / 2, this.Pos.Z + depth / 2);
             GL.TexCoord2(1, 0); // debug
-            GL.Vertex3(pos.X + -width / 2, pos.Y + height / 2, pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + height / 2, this.Pos.Z + -depth / 2);
             GL.TexCoord2(0, 1); // debug
-            GL.Vertex3(pos.X + -width / 2, pos.Y + -height / 2, pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + -height / 2, this.Pos.Z + -depth / 2);
             GL.TexCoord2(0, 0);  // debug
-            GL.Vertex3(pos.X + -width / 2, pos.Y + -height / 2, pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + -height / 2, this.Pos.Z + depth / 2);
 
             GL.Normal3(1.0, 0.0, 0.0);
-            GL.Vertex3(pos.X + width / 2, pos.Y + height / 2, pos.Z + depth / 2);
-            GL.Vertex3(pos.X + width / 2, pos.Y + height / 2, pos.Z + -depth / 2);
-            GL.Vertex3(pos.X + width / 2, pos.Y + -height / 2, pos.Z + -depth / 2);
-            GL.Vertex3(pos.X + width / 2, pos.Y + -height / 2, pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + height / 2, this.Pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + height / 2, this.Pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + -height / 2, this.Pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + -height / 2, this.Pos.Z + depth / 2);
 
             GL.Normal3(0.0, -1.0, 0.0);
-            GL.Vertex3(pos.X + width / 2, pos.Y + -height / 2, pos.Z + depth / 2);
-            GL.Vertex3(pos.X + width / 2, pos.Y + -height / 2, pos.Z + -depth / 2);
-            GL.Vertex3(pos.X + -width / 2, pos.Y + -height / 2, pos.Z + -depth / 2);
-            GL.Vertex3(pos.X + -width / 2, pos.Y + -height / 2, pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + -height / 2, this.Pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + -height / 2, this.Pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + -height / 2, this.Pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + -height / 2, this.Pos.Z + depth / 2);
 
             GL.Normal3(0.0, 1.0, 0.0);
-            GL.Vertex3(pos.X + width / 2, pos.Y + height / 2, pos.Z + depth / 2);
-            GL.Vertex3(pos.X + width / 2, pos.Y + height / 2, pos.Z + -depth / 2);
-            GL.Vertex3(pos.X + -width / 2, pos.Y + height / 2, pos.Z + -depth / 2);
-            GL.Vertex3(pos.X + -width / 2, pos.Y + height / 2, pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + height / 2, this.Pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + height / 2, this.Pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + height / 2, this.Pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + height / 2, this.Pos.Z + depth / 2);
 
             GL.Normal3(0.0, 0.0, -1.0);
-            GL.Vertex3(pos.X + width / 2, pos.Y + height / 2, pos.Z + -depth / 2);
-            GL.Vertex3(pos.X + width / 2, pos.Y + -height / 2, pos.Z + -depth / 2);
-            GL.Vertex3(pos.X + -width / 2, pos.Y + -height / 2, pos.Z + -depth / 2);
-            GL.Vertex3(pos.X + -width / 2, pos.Y + height / 2, pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + height / 2, this.Pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + -height / 2, this.Pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + -height / 2, this.Pos.Z + -depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + height / 2, this.Pos.Z + -depth / 2);
 
             GL.Normal3(0.0, 0.0, 1.0);
-            GL.Vertex3(pos.X + width / 2, pos.Y + height / 2, pos.Z + depth / 2);
-            GL.Vertex3(pos.X + width / 2, pos.Y + -height / 2, pos.Z + depth / 2);
-            GL.Vertex3(pos.X + -width / 2, pos.Y + -height / 2, pos.Z + depth / 2);
-            GL.Vertex3(pos.X + -width / 2, pos.Y + height / 2, pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + height / 2, this.Pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + width / 2, this.Pos.Y + -height / 2, this.Pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + -height / 2, this.Pos.Z + depth / 2);
+            GL.Vertex3(this.Pos.X + -width / 2, this.Pos.Y + height / 2, this.Pos.Z + depth / 2);
 
             GL.End();
 
@@ -79,7 +79,7 @@ namespace SharpEngine.Solids
 
         protected override void UpdateHitbox()
         {
-            this.hitbox = new Hitbox(new Vector3(pos.X + width / 2, pos.Y - height / 2, pos.Z - depth / 2), new Vector3(pos.X - width / 2, pos.Y + height / 2, pos.Z + depth / 2), this.debug);
+            this.hitbox = new Hitbox(new Vector3(this.Pos.X + width / 2, this.Pos.Y - height / 2, this.Pos.Z - depth / 2), new Vector3(this.Pos.X - width / 2, this.Pos.Y + height / 2, this.Pos.Z + depth / 2), this.Debug);
         }
 
         protected override void UpdateVertices()

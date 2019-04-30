@@ -18,22 +18,29 @@ namespace SharpEngine.Solids
 
         // Render
         public bool visible { get; set; }
-        public bool debug { get; set; }
         public float[] color { get; set; }
 
 
+        private bool _debug;
+        public bool Debug { get => _debug; set {
+                _debug = value;
+                this.hitbox.visible = _debug;
+            }
+        }
+
+
         // Body
-        protected Face3[] faces;
+        protected Face3[] Faces;
         public AHitbox hitbox { get; set; }
 
 
         // Physics
         public List<APhysicElement> physicElements { get; set; }
 
-        public ASolid(Vector3 pos)
+        public ASolid(Vector3 pos, Face3[] faces)
         {
-            this.pos = pos;
-            this.hitbox = null;
+            this.Faces = faces;
+            this.Pos = pos;
             this.visible = true;
             this.physicElements = new List<APhysicElement>();
 
@@ -53,15 +60,18 @@ namespace SharpEngine.Solids
         protected abstract void UpdateVertices();
         protected abstract void RenderBody();
 
-        public void Update()
+        public void UpdatePhysics()
         {
-            this.UpdateVertices(); // update position
-            this.UpdateHitbox(); // generate new hitbox
-
-            foreach(APhysicElement element in this.physicElements) // apply physics
+            foreach (APhysicElement element in this.physicElements) // apply physics
             {
                 element.Update(this);
             }
+        }
+
+        protected override void Update()
+        {
+            this.UpdateVertices(); // update position
+            this.UpdateHitbox(); // generate new hitbox
         }
 
         public bool Collide(ASolid solid)

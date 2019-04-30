@@ -14,55 +14,58 @@ namespace SharpEngine.Solids
     {
         // field used for storing pos deviation
         private Vector3 prevPos;
-
-        public Solid(Face3[] faces, Vector3 pos) : base(pos)
+        
+        public Solid(Face3[] faces, Vector3 pos) : base(pos, faces)
         {
-            // deviation = pos, reason for 0 0 0 
-            this.prevPos = new Vector3(0, 0, 0);
-            this.faces = faces;
 
-            this.UpdateHitbox();
         }
 
         protected override void UpdateHitbox()
         {
             // maybe add some checking if update is really needed? Won't implement this until rotation via pivot is implemented tho...
-            float left = faces[0].vertices[0].X;
-            float right = faces[0].vertices[0].X;
-            float top = faces[0].vertices[0].Y;
-            float bottom = faces[0].vertices[0].Y;
-            float close = faces[0].vertices[0].Z;
-            float distant = faces[0].vertices[0].Z;
-
-            foreach (Face3 face in faces)
+            if(this.Faces != null)
             {
-                foreach (Vector3 vertex in face.vertices)
-                {
-                    if (vertex.X > left) left = vertex.X;
-                    if (vertex.X < right) right = vertex.X;
-                    if (vertex.Y > top) top = vertex.Y;
-                    if (vertex.Y < bottom) bottom = vertex.Y;
-                    if (vertex.Z < close) close = vertex.Z;
-                    if (vertex.Z > distant) distant = vertex.Z;
-                }
-            }
+                float left = Faces[0].vertices[0].X;
+                float right = Faces[0].vertices[0].X;
+                float top = Faces[0].vertices[0].Y;
+                float bottom = Faces[0].vertices[0].Y;
+                float close = Faces[0].vertices[0].Z;
+                float distant = Faces[0].vertices[0].Z;
 
-            this.hitbox = new Hitbox(new Vector3(left, bottom, close), new Vector3(right, top, distant), this.debug);
+                foreach (Face3 face in Faces)
+                {
+                    foreach (Vector3 vertex in face.vertices)
+                    {
+                        if (vertex.X > left) left = vertex.X;
+                        if (vertex.X < right) right = vertex.X;
+                        if (vertex.Y > top) top = vertex.Y;
+                        if (vertex.Y < bottom) bottom = vertex.Y;
+                        if (vertex.Z < close) close = vertex.Z;
+                        if (vertex.Z > distant) distant = vertex.Z;
+                    }
+                }
+
+                this.hitbox = new Hitbox(new Vector3(left, bottom, close), new Vector3(right, top, distant), this.Debug);
+            }
         }
 
         protected override void UpdateVertices()
         {
-            Vector3 dev = pos - prevPos;
+            Vector3 dev = this.Pos - prevPos;
             if(dev != new Vector3(0, 0, 0))
             {
-                for (int i = 0; i < this.faces.Length; i++)
+                if(this.Faces != null)
                 {
-                    for (int j = 0; j < this.faces[i].vertices.Length; j++)
+                    for (int i = 0; i < this.Faces.Length; i++)
                     {
-                        faces[i].vertices[j] += dev;
+                        for (int j = 0; j < this.Faces[i].vertices.Length; j++)
+                        {
+                            Faces[i].vertices[j] += dev;
+                        }
                     }
                 }
-                prevPos = pos;
+                
+                prevPos = this.Pos;
             }
         }
 
@@ -72,7 +75,7 @@ namespace SharpEngine.Solids
 
             GL.Color4(color);
 
-            foreach (Face3 face in faces)
+            foreach (Face3 face in Faces)
             {
                 face.Render();
             }
