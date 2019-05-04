@@ -17,13 +17,13 @@ namespace SharpEngine.Render
             this.yaw = 0;
             this.pitch = 0;
             this.sensitivity = 1;
-            Update();
+            UpdatePos(new Vector3(0, 0, 0));
         }
 
         /// <summary>
         /// Camera update if needed
         /// </summary>
-        protected override void Update()
+        protected override void UpdatePos(Vector3 dev)
         {
             this.lookAt = Matrix4.LookAt(this.Pos, new Vector3(this.Pos.X, this.Pos.Y, this.Pos.Z + 1), Vector3.UnitY);
 
@@ -44,7 +44,7 @@ namespace SharpEngine.Render
         {
             this.yaw += (float)mouseProcessor.xDev / 400f * sensitivity;
             this.pitch += (float)mouseProcessor.yDev / 400f * sensitivity;
-            this.Update(); // POLISH THIS LATER!!!
+            this.UpdatePos(new Vector3(0, 0, 0)); // POLISH THIS LATER!!!
         }
 
         public void ProcessKeys(Processors.AKeyProcessor keyProcessor)
