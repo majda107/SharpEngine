@@ -90,6 +90,9 @@ namespace SharpEngine.Gamelib
                     case 't':
                         spider.Pos += new Vector3(0, 100, 0);
                         break;
+                    case 'r':
+                        //spider.Roll += 0.05f;
+                        break;
                 }
             };
 
@@ -118,8 +121,11 @@ namespace SharpEngine.Gamelib
 
             this.camera.ProcessMouse(this.mouseProcessor);
             this.camera.ProcessKeys(this.keyboardProcessor);
-            //this.camera.Update();
             this.camera.Render();
+
+            this.spider.Roll += 0.1f;
+            this.spider.Pitch += 0.1f;
+            this.spider.Yaw += 0.1f;
 
             this.GameObjectManager.UpdateAllPhysics();
 
