@@ -8,6 +8,7 @@ using SharpEngine.GameManager;
 using OpenTK;
 using SharpEngine.ObjLoader;
 using SharpEngine.Physics;
+using SharpEngine.MathOperations;
 
 namespace SharpEngine.Solids
 {
@@ -28,6 +29,37 @@ namespace SharpEngine.Solids
             }
         }
 
+        public Vector3 pivot;
+
+
+        private Vector3 angles;
+        public float Pitch { get => angles.X; set
+            {
+                VertexBufferOperations.MultiplyBufferByMatrix(Matrix3.CreateRotationX(value - angles.X), ref this.Faces, pivot);
+                angles.X = value;
+
+                UpdateHitbox();
+            }
+        }
+
+        public float Yaw { get => angles.Y; set
+            {
+                VertexBufferOperations.MultiplyBufferByMatrix(Matrix3.CreateRotationY(value - angles.Y), ref this.Faces, pivot);
+                angles.Y = value;
+
+                UpdateHitbox();
+            }
+        }
+
+        public float Roll { get => angles.Z; set
+            {
+                VertexBufferOperations.MultiplyBufferByMatrix(Matrix3.CreateRotationZ(value - angles.Z), ref this.Faces, pivot);
+                angles.Z = value;
+
+                UpdateHitbox();
+            }
+        }
+
 
         // Body
         protected Face3[] Faces;
@@ -44,6 +76,8 @@ namespace SharpEngine.Solids
             this.visible = true;
             this.physicElements = new List<APhysicElement>();
 
+            this.pivot = VertexBufferOperations.GetCenterPivot(ref this.Faces);
+
             this.color = new float[4] { 1.0f, 1.0f, 1.0f, 1.0f };
         }
 
@@ -57,7 +91,7 @@ namespace SharpEngine.Solids
         }
  
         protected abstract void UpdateHitbox();
-        protected abstract void UpdateVertices();
+        protected abstract void UpdateVertices(Vector3 dev);
         protected abstract void RenderBody();
 
         public void UpdatePhysics()
@@ -68,9 +102,10 @@ namespace SharpEngine.Solids
             }
         }
 
-        protected override void Update()
+        protected override void UpdatePos(Vector3 dev)
         {
-            this.UpdateVertices(); // update position
+            this.UpdateVertices(dev); // update position
+            this.pivot += dev; // update pivot
             this.UpdateHitbox(); // generate new hitbox
         }
 
