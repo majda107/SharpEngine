@@ -14,11 +14,11 @@ namespace SharpEngine.GameManager
         public Vector3 Pos { get => _pos; set {
                 if(_pos != value)
                 {
+                    this.UpdatePos(value - _pos);
                     _pos = value;
-                    this.Update();
                 }
             } }
 
-        protected abstract void Update();
+        protected abstract void UpdatePos(Vector3 dev);
     }
 }
