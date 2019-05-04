@@ -11,10 +11,7 @@ using OpenTK;
 namespace SharpEngine.Solids
 {
     class Solid : ASolid
-    {
-        // field used for storing pos deviation
-        private Vector3 prevPos;
-        
+    {   
         public Solid(Face3[] faces, Vector3 pos) : base(pos, faces)
         {
 
@@ -49,9 +46,8 @@ namespace SharpEngine.Solids
             }
         }
 
-        protected override void UpdateVertices()
+        protected override void UpdateVertices(Vector3 dev)
         {
-            Vector3 dev = this.Pos - prevPos;
             if(dev != new Vector3(0, 0, 0))
             {
                 if(this.Faces != null)
@@ -64,8 +60,6 @@ namespace SharpEngine.Solids
                         }
                     }
                 }
-                
-                prevPos = this.Pos;
             }
         }
 
