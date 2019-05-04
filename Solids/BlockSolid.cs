@@ -82,7 +82,7 @@ namespace SharpEngine.Solids
             this.hitbox = new Hitbox(new Vector3(this.Pos.X + width / 2, this.Pos.Y - height / 2, this.Pos.Z - depth / 2), new Vector3(this.Pos.X - width / 2, this.Pos.Y + height / 2, this.Pos.Z + depth / 2), this.Debug);
         }
 
-        protected override void UpdateVertices()
+        protected override void UpdateVertices(Vector3 dev)
         {
             // implement later
         }
